@@ -36,7 +36,7 @@ It requires `cyberark_credential` gem.
 
 #### Examples
 
-Retrieves CyberArk credential for account which matches criteria "Safe=Test;Folder=Root;Object=Object", 
+Retrieves CyberArk credential for account which matches criteria "Safe=Test;Folder=Root;Object=Object",
 and creates a file named /tmp/test.txt with information received from CyberArk.
 
 ```ruby
@@ -45,11 +45,11 @@ chef_gem 'cyberark_credential' do
 end
 
 cyberark_credential "cred1" do
-  app_id "Chef_App"
-  query "Safe=Test;Folder=Root;Object=Object"
+  app_id #{node['cyberark']['app_id']}
+  query #{node['cyberark']['query']}
   notifies :create, "file[/tmp/test.txt]", :immediately
-  base_url "http://192.168.86.162"
-  use_ssl false
+  base_url #{node['cyberark']['base_url']}
+  use_ssl  #{node['cyberark']['use_ssl']}
 end
 
 file '/tmp/test.txt' do
