@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the cyberark cookbook.
 
-## 0.1.0
+## 1.0.0
 - [Edward Nunez] - Initial release of cyberark
 
 - - -
