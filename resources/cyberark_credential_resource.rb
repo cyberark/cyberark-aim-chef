@@ -34,15 +34,15 @@ action :read do
   begin
 
     # Retrieve credential using cyberark_credential rubygem
-    req = CyberArk::Credential.new(base_url, use_ssl)
-    account = req.get(app_id, query)
+    req = CyberArk::Credential.new(new_resource.base_url, new_resource.use_ssl)
+    account = req.get(new_resource.app_id, new_resource.query)
 
     if account.nil?
       raise "Could not find credential matching query: `#{query}'!"
     end
 
     # Persist the secret in-memory for the rest of this Chef run.
-    node.run_state[name] = account
+    node.run_state[new_resource.name] = account
 
     # Tell notifications to fire.
     updated_by_last_action(true)
@@ -52,3 +52,4 @@ action :read do
   end
 
 end
+
