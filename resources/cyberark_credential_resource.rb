@@ -38,18 +38,17 @@ action :read do
     account = req.get(new_resource.app_id, new_resource.query)
 
     if account.nil?
-      raise "Could not find credential matching query: `#{query}'!"
+      raise "Could not find credential matching query: #{new_resource.query}!"
     end
 
     # Persist the secret in-memory for the rest of this Chef run.
     node.run_state[new_resource.name] = account
 
     # Tell notifications to fire.
-    updated_by_last_action(true)
+    new_resource.updated_by_last_action(true)
 
   rescue
-    raise "Could not find credential matching query: `#{query}'!"
+    raise "Could not find credential matching query: #{new_resource.query}!"
   end
 
 end
-

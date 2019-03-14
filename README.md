@@ -45,11 +45,11 @@ chef_gem 'cyberark_credential' do
 end
 
 cyberark_credential "cred1" do
-  app_id #{node['cyberark']['app_id']}
-  query #{node['cyberark']['query']}
+  app_id 'Chef_App' # it could be defaulted or use #{node['cyberark']['app_id']}
+  query 'Safe=Test;Folder=Root;Object=Object' # it could be defaulted or use #{node['cyberark']['query']}
   notifies :create, "file[/tmp/test.txt]", :immediately
-  base_url #{node['cyberark']['base_url']}
-  use_ssl  #{node['cyberark']['use_ssl']}
+  base_url 'http://192.168.86.162' # it could be defaulted or use #{node['cyberark']['base_url']}
+  use_ssl  false # it could be defaulted or use #{node['cyberark']['use_ssl']}
 end
 
 file '/tmp/test.txt' do
